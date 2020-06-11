@@ -9,6 +9,32 @@ import os
 import pickle
 from keras.callbacks import TensorBoard
 from sklearn.model_selection import train_test_split
+from datetime import datetime
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+
+def printAccuracy():
+
+    test_eval = model.evaluate(X_test, y_test, verbose=0)
+    print('Test loss:', test_eval[0])
+    print('Test accuracy:', test_eval[1])
+
+
+def drawROC():
+
+    y_pred = model.predict(X_test).ravel()
+    fpr, tpr, thresholds = roc_curve(y_test, y_pred)
+    _auc = auc(fpr, tpr)
+
+    plt.figure(1)
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.plot(fpr, tpr, label='Roc curve (area = {:.3f})'.format(_auc))
+    plt.xlabel('False positive rate')
+    plt.ylabel('True positive rate')
+    plt.title('ROC curve')
+    plt.legend(loc='best')
+    plt.show()
+
 
 NAME = "B006-vs-B007-CNN"
 num_classes = 2
@@ -66,8 +92,15 @@ model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard])
-test_eval = model.evaluate(X_test, y_test, verbose=0)
+print(".....Training started.....")
+start_time = datetime.now()
+model.fit(X_train, y_train, batch_size=32, epochs=30, validation_split=0.2, callbacks=[tensorboard])
+time_dif = datetime.now() - start_time
+print(".....Training finished.....")
+print("Training time: ", time_dif)
 
-print('Test loss:', test_eval[0])
-print('Test accuracy:', test_eval[1])
+printAccuracy()
+drawROC()
+
+
+
