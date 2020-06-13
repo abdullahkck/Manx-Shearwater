@@ -1,12 +1,14 @@
 import os
 import matplotlib
-matplotlib.use('Agg') # No pictures displayed
 import pylab
 import librosa
 import librosa.display
 import numpy as np
 
-def convertCallsToSpectograms(directory):
+matplotlib.use('Agg')  # No pictures displayed
+
+
+def convert_calls_to_spectograms(directory):
     count = 0
     for subdir, dirs, files in os.walk(directory):
         for file in files:
@@ -27,7 +29,7 @@ def createSpectrogram(directory, filepath, file):
     save_path = directory + 'Spectrograms' + os.sep + pre + '.png'
 
     pylab.axis('off') # no axis
-    pylab.axes([0., 0., 1., 1.], frameon=False, xticks=[], yticks=[]) # Remove the white edge
+    pylab.axes([0., 0., 1., 1.], frameon=False, xticks=[], yticks=[])  # Remove the white edge
     S = librosa.feature.melspectrogram(y=sig, sr=fs)
     librosa.display.specshow(librosa.power_to_db(S, ref=np.max))
     pylab.savefig(save_path, bbox_inches=None, pad_inches=0)
@@ -36,7 +38,7 @@ def createSpectrogram(directory, filepath, file):
 
 def main():
     directory = '/Users/abdullahkucuk/Desktop/MSc/MSc Project/records.nosync/manx_shearwater_test_calls/'
-    convertCallsToSpectograms(directory)
+    convert_calls_to_spectograms(directory)
 
 
 main()

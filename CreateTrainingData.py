@@ -11,38 +11,56 @@ training_data = []
 categories = ["B006", "B007"]
 
 
+def check_call_is_existed(img_array):
+    if np.sum(img_array[0:480, 0:640]) > 13500000:  # if the sum of pixels less than 15 millions, there should be a call
+        return True
+    return False
+
+
 def create_training_data():
+    eliminated_spec_count = 0
     for img in tqdm(os.listdir(path)):  # iterate over each image
         try:
-            category = img[:4]
+            category = img[:4]  # get the category name
             class_num = categories.index(category)  # get the classification
             img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)  # convert to array
-            training_data.append([img_array, class_num])  # add this to our training_data
-        except Exception as e:  # in the interest in keeping the output clean...
+            if check_call_is_existed(img_array):
+                training_data.append([img_array, class_num])  # add this to our training_data
+            else:
+                eliminated_spec_count = eliminated_spec_count + 1
+                # print("Eliminated img name: ", img, " sum: ", np.sum(img_array[0:480, 0:640]))
+        except Exception as e:
+            print("Image read exception: ", e, os.path.join(path, img))
             pass
-        # except OSError as e:
-        #    print("OSErrroBad img most likely", e, os.path.join(path,img))
-        # except Exception as e:
-        #    print("general exception", e, os.path.join(path,img))
+    print("Training data count: ", len(training_data))
+    print("Eliminated data count: ", eliminated_spec_count)
 
 
-create_training_data()
-print(len(training_data))
-random.shuffle(training_data)
+def create_pickles():
+    X = []
+    y = []
 
-X = []
-y = []
+    for features, label in training_data:
+        X.append(features)
+        y.append(label)
 
-for features, label in training_data:
-    X.append(features)
-    y.append(label)
+    X = np.array(X).reshape(-1, 640, 480, 1)
 
-X = np.array(X).reshape(-1, 640, 480, 1)
+    pickle_out = open("X.pickle", "wb")
+    pickle.dump(X, pickle_out)
+    pickle_out.close()
 
-pickle_out = open("X.pickle", "wb")
-pickle.dump(X, pickle_out)
-pickle_out.close()
+    pickle_out = open("y.pickle", "wb")
+    pickle.dump(y, pickle_out)
+    pickle_out.close()
 
-pickle_out = open("y.pickle", "wb")
-pickle.dump(y, pickle_out)
-pickle_out.close()
+
+def main():
+
+    create_training_data()
+    random.shuffle(training_data)
+    create_pickles()
+
+
+main()
+
