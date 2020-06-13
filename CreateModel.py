@@ -36,7 +36,8 @@ def drawROC():
     plt.show()
 
 
-NAME = "B006-vs-B007-CNN"
+epoch = 25
+NAME = "B006-vs-B007-" + str(epoch) + "-epochs"
 num_classes = 2
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
@@ -94,9 +95,10 @@ model.compile(loss='binary_crossentropy',
 
 print(".....Training started.....")
 start_time = datetime.now()
-model.fit(X_train, y_train, batch_size=32, epochs=30, validation_split=0.2, callbacks=[tensorboard])
+model.fit(X_train, y_train, batch_size=32, epochs=epoch, validation_split=0.2, callbacks=[tensorboard])
 time_dif = datetime.now() - start_time
 print(".....Training finished.....")
+print("Epochs: ", epoch)
 print("Training time: ", time_dif)
 
 printAccuracy()
