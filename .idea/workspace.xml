@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="822a3b66-8c04-4cf4-bc8c-e6df50a0fb4b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreateModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateModel.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +28,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1bTAaOBTm8JfhJskOUifPKdnjRD" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -52,8 +53,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.CreateModel">
-    <configuration name="CNN" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.CreateAutoencoder">
+    <configuration name="CreateAutoencoder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -65,7 +66,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CNN.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateAutoencoder.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -159,19 +160,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.CNN" />
       <item itemvalue="Python.CreateTrainingData.py" />
       <item itemvalue="Python.CreateSpectrogram" />
       <item itemvalue="Python.CreateModel" />
       <item itemvalue="Python.KNN" />
+      <item itemvalue="Python.CreateAutoencoder" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.CreateAutoencoder" />
         <item itemvalue="Python.CreateModel" />
         <item itemvalue="Python.CreateTrainingData.py" />
         <item itemvalue="Python.CreateSpectrogram" />
         <item itemvalue="Python.KNN" />
-        <item itemvalue="Python.CNN" />
       </list>
     </recent_temporary>
   </component>
