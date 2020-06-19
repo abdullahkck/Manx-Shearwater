@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="822a3b66-8c04-4cf4-bc8c-e6df50a0fb4b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateKNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/KNN_Classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateKNN2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateTrainingData.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateTrainingData.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +59,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.CreateKNN">
+  <component name="RunManager" selected="Python.KNN_Clustering">
     <configuration name="CreateAutoencoder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,7 +93,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateKNN.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/KNN_Classifier.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -99,7 +102,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CreateKNN2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="CreateTrainingData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -111,7 +114,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateKNN2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateTrainingData.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -120,7 +123,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CreateModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="KNN_Classifier" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -132,7 +135,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateModel.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/KNN_Classifier.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,7 +144,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="KNN_Clustering" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -153,7 +156,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/KNN_Clustering.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,19 +166,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.CreateModel" />
       <item itemvalue="Python.CreateAutoencoder" />
-      <item itemvalue="Python.Test" />
       <item itemvalue="Python.CreateKNN" />
-      <item itemvalue="Python.CreateKNN2" />
+      <item itemvalue="Python.KNN_Classifier" />
+      <item itemvalue="Python.KNN_Clustering" />
+      <item itemvalue="Python.CreateTrainingData" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.KNN_Clustering" />
+        <item itemvalue="Python.KNN_Classifier" />
         <item itemvalue="Python.CreateKNN" />
-        <item itemvalue="Python.CreateKNN2" />
         <item itemvalue="Python.CreateAutoencoder" />
-        <item itemvalue="Python.Test" />
-        <item itemvalue="Python.CreateModel" />
+        <item itemvalue="Python.CreateTrainingData" />
       </list>
     </recent_temporary>
   </component>
@@ -204,5 +207,26 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/KNN_Clustering.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/KNN_Clustering.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/KNN_Clustering.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

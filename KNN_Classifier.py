@@ -2,8 +2,6 @@ import numpy as np
 import os
 import pickle
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-from sklearn import neighbors, datasets
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import seaborn as sns
@@ -30,7 +28,7 @@ def main():
     test = []
     scores = {}
 
-    for k in range(2, 21):
+    for k in range(1, 10):
         clf = KNeighborsClassifier(n_neighbors=k)
         clf.fit(X_train, y_train)
 
@@ -55,6 +53,9 @@ def main():
     ax.set(xlabel='values of k', ylabel='Test Score')
     plt.show()
 
+    plt.title('kNN training vs testing scores')
+    plt.xlabel('Cluster')
+    plt.ylabel('Score')
     plt.scatter(K, training, color='k')
     plt.scatter(K, test, color='g')
     plt.show()
