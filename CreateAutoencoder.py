@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-pickle_in = open("X.pickle", "rb")
+pickle_in = open("Calls_67_X_B007.pickle", "rb")
 X = pickle.load(pickle_in)
 
-pickle_in = open("y.pickle", "rb")
+pickle_in = open("Calls_67_y_B007.pickle", "rb")
 y = pickle.load(pickle_in)
 
 X_train, X_test, _, _ = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -67,7 +67,7 @@ X_encoded_test = encoder.predict(X_test)  # Just to plot
 X_encoded = encoder.predict(X)
 
 # Save encoded inputs for unsupervised learning
-pickle_out = open("X_encoded.pickle", "wb")
+pickle_out = open("Calls_67_X_B007_encoded_30e_(4x40x30).pickle", "wb")
 pickle.dump(X_encoded, pickle_out)
 pickle_out.close()
 # -----------------------------------------------

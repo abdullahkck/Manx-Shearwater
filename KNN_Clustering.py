@@ -6,7 +6,7 @@ from sklearn.manifold import MDS
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-dataset_name = "X_B007_encoded_30e_(4x40x30)"
+dataset_name = "Calls_67_X_B007_encoded_30e_(4x40x30)"
 cluster_count = 2
 
 pickle_in = open(dataset_name + ".pickle", "rb")

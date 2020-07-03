@@ -1,5 +1,4 @@
 import tensorflow as tf
-from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
@@ -12,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from datetime import datetime
 from sklearn.metrics import roc_curve, auc
 import matplotlib.pyplot as plt
+from sklearn.model_selection import KFold
 
 def printAccuracy():
 
@@ -26,6 +26,8 @@ def drawROC():
     fpr, tpr, thresholds = roc_curve(y_test, y_pred)
     _auc = auc(fpr, tpr)
 
+    print('AUC:', '%0.3f' % _auc)
+
     plt.figure(1)
     plt.plot([0, 1], [0, 1], 'k--')
     plt.plot(fpr, tpr, label='Roc curve (area = {:.3f})'.format(_auc))
@@ -36,16 +38,20 @@ def drawROC():
     plt.show()
 
 
-epoch = 25
+num_folds = 10
+epoch = 35
 NAME = "B006-vs-B007-" + str(epoch) + "-epochs"
 num_classes = 2
+acc_per_fold = []
+loss_per_fold = []
+auc_per_fold = []
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-pickle_in = open("X.pickle", "rb")
+pickle_in = open("Calls_67_X.pickle", "rb")
 X = pickle.load(pickle_in)
 
-pickle_in = open("y.pickle", "rb")
+pickle_in = open("Calls_67_y.pickle", "rb")
 y = pickle.load(pickle_in)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -95,7 +101,7 @@ model.compile(loss='binary_crossentropy',
 
 print(".....Training started.....")
 start_time = datetime.now()
-model.fit(X_train, y_train, batch_size=32, epochs=epoch, validation_split=0.2, callbacks=[tensorboard])
+model.fit(X_train, y_train, batch_size=128, epochs=epoch, validation_split=0.2, callbacks=[tensorboard])
 time_dif = datetime.now() - start_time
 print(".....Training finished.....")
 print("Epochs: ", epoch)
