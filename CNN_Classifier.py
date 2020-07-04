@@ -14,7 +14,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 
-num_folds = 5
+num_folds = 10
 fold_no = 1
 epoch = 25
 NAME = "Large-B006-vs-B007-" + str(num_folds) + "-folds-" + str(epoch) + "-epochs"
