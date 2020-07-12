@@ -11,12 +11,16 @@ from datetime import datetime
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
 from keras.utils.np_utils import to_categorical
+from sklearn.model_selection import StratifiedShuffleSplit
 
 
 def main():
     num_folds = 10
     fold_no = 1
     NAME = "Pairs-(685_754)-(686_755)-(686_308)-" + str(num_folds) + "-folds-KNN"
+    cm_sum = [[0, 0, 0],
+           [0, 0, 0],
+           [0, 0, 0]]
 
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
@@ -48,7 +52,7 @@ def main():
     # convert the training labels to categorical vectors
     targets = to_categorical(targets, num_classes=3)
 
-    k_fold = KFold(n_splits=num_folds, shuffle=True)
+    k_fold = StratifiedShuffleSplit(n_splits=num_folds, test_size=0.2, random_state=0)
 
     fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111)
@@ -65,6 +69,7 @@ def main():
     best_loss_score_per_fold = []
     best_macro_auc_per_fold = []
     best_weighted_auc_per_fold = []
+    best_cm_per_fold = []
 
     for train, test in k_fold.split(inputs, targets):
 
@@ -73,6 +78,7 @@ def main():
         test_scores = []
         macro_auc_scores = []
         weighted_auc_scores = []
+        cm_scores = []
         fpr_scores = []
         tpr_scores = []
         scores = {}
@@ -85,11 +91,13 @@ def main():
 
             # rounded_targets = np.argmax(targets[test], axis=1)
 
-            cnf_matrix = confusion_matrix(targets[test].argmax(axis=1), y_pred.argmax(axis=1), labels=[1, 2, 3])
+            cnf_matrix = confusion_matrix(targets[test].argmax(axis=1), y_pred.argmax(axis=1), labels=[0, 1, 2])
             # cnf_matrix = confusion_matrix(rounded_targets, y_prob, labels=[0, 1, 2])
 
             print("Current Fold:")
             print(fold_no)
+            print("Current k:")
+            print(k)
             print(cnf_matrix)
 
             macro_roc_auc = roc_auc_score(targets[test], y_pred, average="macro")
@@ -102,7 +110,6 @@ def main():
                   "(weighted by prevalence)"
                   .format(macro_roc_auc, weighted_roc_auc))
 
-            fold_no = fold_no + 1
 
 
             # get training and test scores
@@ -111,10 +118,12 @@ def main():
 
             training_scores.append(training_score)
             test_scores.append(test_score)
+            cm_scores.append(cnf_matrix)
 
             K.append(k)
             scores[k] = [training_score, test_score, '%0.3f' % macro_roc_auc, '%0.3f' % weighted_roc_auc]
 
+        fold_no = fold_no + 1
         print('----------------------------------')
         for keys, values in scores.items():
             print(keys, ':', values)
@@ -135,6 +144,8 @@ def main():
 
         max_k_index = weighted_auc_scores.index(max(weighted_auc_scores))
         best_weighted_auc_per_fold.append(weighted_auc_scores[max_k_index])
+
+        best_cm_per_fold.append(cm_scores[max_k_index])
 
         best_acc_score_per_fold.append(test_scores[max_k_index])
         best_loss_score_per_fold.append(training_scores[max_k_index])
@@ -158,6 +169,10 @@ def main():
     print('Loss:', '%0.3f' % np.mean(best_loss_score_per_fold))
     print('Macro AUC:', '%0.3f' % np.mean(best_macro_auc_per_fold))
     print('Weighted AUC:', '%0.3f' % np.mean(best_weighted_auc_per_fold))
+    for fold in best_cm_per_fold:
+        cm_sum = np.add(cm_sum, fold)
+    print('Sum of CF matrixes:')
+    print(cm_sum)
     print('------------------------------------------------------------------------')
 
     ax.text(0.5, 0.01, 'Mean of AUCs = ' + '%0.3f' % np.mean(best_weighted_auc_per_fold), style='italic',

@@ -15,6 +15,7 @@ from sklearn.model_selection import train_test_split
 from keras.utils.np_utils import to_categorical
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import StratifiedShuffleSplit
 
 
 num_folds = 10
@@ -51,10 +52,15 @@ X_test = X_test/255.0
 inputs = np.concatenate((X_train, X_test), axis=0)
 targets = np.concatenate((y_train, y_test), axis=0)
 
+#  print class distribution
+print(".....Class distributions.....")
+unique, counts = np.unique(targets, return_counts=True)
+print(dict(zip(unique, counts)))
+
 # convert the training labels to categorical vectors
 targets = to_categorical(targets, num_classes=3)
 
-k_fold = KFold(n_splits=num_folds, shuffle=True)
+k_fold = StratifiedShuffleSplit(n_splits=num_folds, test_size=0.2, random_state=0)
 
 print(".....Training started.....")
 start_time = datetime.now()
@@ -126,8 +132,9 @@ for train, test in k_fold.split(inputs, targets):
 
     # for i in num_classes:
     #   roc_curve(targets[test][:, i], y_prob[:, 0])
-    macro_roc_auc    = roc_auc_score(targets[test], y_prob, average="macro")
-    weighted_roc_auc = roc_auc_score(targets[test], y_prob, average="weighted")
+    y_pred = to_categorical(y_pred, num_classes=3)
+    macro_roc_auc    = roc_auc_score(targets[test], y_pred, average="macro")
+    weighted_roc_auc = roc_auc_score(targets[test], y_pred, average="weighted")
 
     macro_auc_per_fold.append(macro_roc_auc)
     weighted_auc_per_fold.append(weighted_roc_auc)
