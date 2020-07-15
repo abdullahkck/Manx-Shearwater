@@ -165,10 +165,12 @@ def main():
         print('Fold ' + str(i) + ': ', '%0.3f' % best_weighted_auc_per_fold[i])
     print('Average scores for all folds:')
     print('Accuracy:', '%0.3f' % np.mean(best_acc_score_per_fold))
-    print('Std:', '%0.3f' % np.std(best_acc_score_per_fold))
+    print('Accuracy Std:', '%0.3f' % np.std(best_acc_score_per_fold))
     print('Loss:', '%0.3f' % np.mean(best_loss_score_per_fold))
     print('Macro AUC:', '%0.3f' % np.mean(best_macro_auc_per_fold))
+    print('Macro AUC Std:', '%0.3f' % np.std(best_macro_auc_per_fold))
     print('Weighted AUC:', '%0.3f' % np.mean(best_weighted_auc_per_fold))
+    print('Weighted AUC Std:', '%0.3f' % np.std(best_weighted_auc_per_fold))
     for fold in best_cm_per_fold:
         cm_sum = np.add(cm_sum, fold)
     print('Sum of CF matrixes:')
