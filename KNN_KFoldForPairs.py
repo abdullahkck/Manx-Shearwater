@@ -25,14 +25,14 @@ def main():
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
     #  dataset_name = "Calls_67_X_encoded_30e_(4x40x30)"
-    dataset_name = "Calls_67_pairs_X_encoded_30e_(4x40x30)"
+    dataset_name = "Calls_67_pairs_generated_X_encoded_30e_(4x40x30)"
 
     pickle_in = open(dataset_name + ".pickle", "rb")
     X = pickle.load(pickle_in)
     X = X.reshape(len(X), 4800)
 
     #  pickle_in = open("Calls_67_y.pickle", "rb")
-    pickle_in = open("Calls_67_pairs_y.pickle", "rb")
+    pickle_in = open("Calls_67_pairs_generated_y.pickle", "rb")
     y = pickle.load(pickle_in)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

@@ -30,11 +30,11 @@ weighted_auc_per_fold = []
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-pickle_in = open("Calls_67_pairs_X.pickle", "rb")
+pickle_in = open("Calls_67_pairs_generated_X.pickle", "rb")
 #  pickle_in = open("X.pickle", "rb")
 X = pickle.load(pickle_in)
 
-pickle_in = open("Calls_67_pairs_y.pickle", "rb")
+pickle_in = open("Calls_67_pairs_generated_y.pickle", "rb")
 #  pickle_in = open("y.pickle", "rb")
 y = pickle.load(pickle_in)
 

@@ -6,7 +6,7 @@ from tqdm import tqdm
 import random
 import pickle
 
-path = '/Users/abdullahkucuk/Desktop/MSc/MSc Project/records.nosync/calls_67/Spectrograms_pairs'
+path = '/Users/abdullahkucuk/Desktop/MSc/MSc Project/records.nosync/calls_67/Spectrograms_pairs_generated'
 training_data = []
 categories = ["685_754", "686_755", "686_308"]
 
@@ -49,12 +49,12 @@ def create_pickles():
     X = np.array(X).reshape(-1, 640, 480, 1)
 
     #  pickle_out = open("Calls_67_X_B006.pickle", "wb")
-    pickle_out = open("Calls_67_pairs_X.pickle", "wb")
+    pickle_out = open("Calls_67_pairs_generated_X.pickle", "wb")
     pickle.dump(X, pickle_out)
     pickle_out.close()
 
     #  pickle_out = open("Calls_67_y_B006.pickle", "wb")
-    pickle_out = open("Calls_67_pairs_y.pickle", "wb")
+    pickle_out = open("Calls_67_pairs_generated_y.pickle", "wb")
     pickle.dump(y, pickle_out)
     pickle_out.close()
 

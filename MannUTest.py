@@ -3,18 +3,42 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-cnn_auc_scores = [0.901, 0.890, 0.877, 0.887, 0.880, 0.872, 0.872, 0.876, 0.905, 0.871]
-knn_auc_scores = [0.927, 0.940, 0.925, 0.925, 0.973, 0.957, 0.922, 0.941, 0.918, 0.921]
+plt_title = 'kNN 10 folds 3 Pairs Classification Original vs Balanced Dataset'
+labels = ('Original', 'Balanced')
+first_auc_scores = [
+0.927,
+0.940,
+0.925,
+0.925,
+0.973,
+0.957,
+0.922,
+0.941,
+0.918,
+0.921
+]
 
-result = sts.mannwhitneyu(knn_auc_scores, cnn_auc_scores, alternative='two-sided')
+second_auc_scores = [
+0.923,
+0.929,
+0.945,
+0.920,
+0.915,
+0.911,
+0.883,
+0.911,
+0.949,
+0.913
+]
+
+result = sts.mannwhitneyu(second_auc_scores, first_auc_scores, alternative='two-sided')
 p_value = result[1]
 print('pvalue =', result[1])
 
-scoreMeans   = (np.mean(cnn_auc_scores), np.mean(knn_auc_scores))
-scoreStd     = (np.std(cnn_auc_scores), np.std(knn_auc_scores))
+scoreMeans   = (np.mean(first_auc_scores), np.mean(second_auc_scores))
+scoreStd     = (np.std(first_auc_scores), np.std(second_auc_scores))
 ind  = [1, 2]    # the x locations for the groups
 width= 0.6
-labels = ('CNN', 'kNN')
 
 # Pull the formatting out here
 bar_kwargs = {'width':width,'color':'b','linewidth':2,'zorder':5}
@@ -35,16 +59,19 @@ def label_diff(i,j,text,X,Y):
     props = {'connectionstyle':'bar','arrowstyle':'-',\
                  'shrinkA':1,'shrinkB':1.5,'linewidth':1}
     ax.annotate(text, xy=(X[i],y + 1.7), zorder=10)
-    ax.annotate('std =' + str("%.3f" % np.std(cnn_auc_scores)), xy=(X[i], y + 0.92), zorder=10)
-    ax.annotate('mean =' + str("%.3f" % np.mean(cnn_auc_scores)), xy=(X[i], y + 1.01), zorder=10)
-    ax.annotate('std =' + str("%.3f" %np.std(knn_auc_scores)), xy=(X[j], y + 0.99), zorder=10)
-    ax.annotate('mean =' + str("%.3f" % np.mean(knn_auc_scores)), xy=(X[j], y + 1.08), zorder=10)
+
+    # ax.annotate('std =' + str("%.3f" % np.std(first_auc_scores)), xy=(X[i], y + 0.92), zorder=10)
+    # ax.annotate('mean =' + str("%.3f" % np.mean(first_auc_scores)), xy=(X[i], y + 1.01), zorder=10)
+    ax.annotate('std =' + str("%.3f" % np.std(first_auc_scores)), xy=(X[i], y + 0.99), zorder=10)
+    ax.annotate('mean =' + str("%.3f" % np.mean(first_auc_scores)), xy=(X[i], y + 1.08), zorder=10)
+    ax.annotate('std =' + str("%.3f" % np.std(second_auc_scores)), xy=(X[j], y + 0.99), zorder=10)
+    ax.annotate('mean =' + str("%.3f" % np.mean(second_auc_scores)), xy=(X[j], y + 1.08), zorder=10)
     ax.annotate('', xy=(X[i], y + 1.2), xytext=(X[j], y + 1.2), arrowprops=props)
 
 # Call the function
 label_diff(0, 1,'p=' + str('%.5f' % p_value), ind, scoreMeans)
 
-plt.title('Pair Classification CNN vs kNN Results')
+plt.title(plt_title)
 plt.ylabel('Weighted AUC Mean')
 plt.ylim(ymax=2)
 plt.xticks(ind, labels, color='k')
