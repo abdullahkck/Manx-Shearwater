@@ -6,8 +6,8 @@
       <change beforePath="$PROJECT_DIR$/CNN_ClassifierForPairs.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN_ClassifierForPairs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateAutoencoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateAutoencoder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateCM.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateCM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreateTrainingDataForPairs.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateTrainingDataForPairs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KNN_KFoldForPairs.py" beforeDir="false" afterPath="$PROJECT_DIR$/KNN_KFoldForPairs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateSpectrogram.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateSpectrogram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateTrainingData.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateTrainingData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MannUTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/MannUTest.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,27 +85,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CreateAutoencoder" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Spectrogram2" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateAutoencoder.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="CreateCM" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,6 +127,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="KNN_KFold_Balanced_vs_Original" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Spectrogram2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/KNN_KFold_Balanced_vs_Original.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="MannUTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spectrogram2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -170,19 +170,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.CNN_ClassifierForPairs" />
       <item itemvalue="Python.CreateCM" />
-      <item itemvalue="Python.CreateAutoencoder" />
       <item itemvalue="Python.KNN_KFoldForPairs" />
       <item itemvalue="Python.MannUTest" />
+      <item itemvalue="Python.KNN_KFold_Balanced_vs_Original" />
+      <item itemvalue="Python.CNN_ClassifierForPairs" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.MannUTest" />
         <item itemvalue="Python.CreateCM" />
-        <item itemvalue="Python.KNN_KFoldForPairs" />
         <item itemvalue="Python.CNN_ClassifierForPairs" />
-        <item itemvalue="Python.CreateAutoencoder" />
+        <item itemvalue="Python.KNN_KFold_Balanced_vs_Original" />
+        <item itemvalue="Python.KNN_KFoldForPairs" />
       </list>
     </recent_temporary>
   </component>
@@ -211,51 +211,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>135</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>136</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>138</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>139</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>119</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/KNN_KFoldForPairsBalanced.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CNN_ClassifierForPairs.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

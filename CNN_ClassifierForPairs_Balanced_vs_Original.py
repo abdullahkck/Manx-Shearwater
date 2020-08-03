@@ -31,6 +31,33 @@ weighted_auc_per_fold = []
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
+#  -------------------------------------------------------------------------
+dataset_name_ori = "Calls_67_pairs_X"
+pickle_in = open(dataset_name_ori + ".pickle", "rb")
+X_ori = pickle.load(pickle_in)
+
+#  pickle_in = open("Calls_67_y.pickle", "rb")
+pickle_in = open("Calls_67_pairs_y.pickle", "rb")
+y_ori = pickle.load(pickle_in)
+
+X_train_ori, X_test_ori, y_train_ori, y_test_ori = train_test_split(X_ori, y_ori, test_size=0.2, random_state=42)
+
+X_train_ori = np.array(X_train_ori)
+y_train_ori = np.array(y_train_ori)
+
+X_test_ori = np.array(X_test_ori)
+y_test_ori = np.array(y_test_ori)
+
+X_train_ori = X_train_ori / 255.0
+X_test_ori = X_test_ori / 255.0
+
+inputs_ori = np.concatenate((X_train_ori, X_test_ori), axis=0)
+targets_ori = np.concatenate((y_train_ori, y_test_ori), axis=0)
+
+# convert the training labels to categorical vectors
+targets_ori = to_categorical(targets_ori, num_classes=3)
+#  -------------------------------------------------------------------------
+
 #  pickle_in = open("Calls_all_X.pickle", "rb")
 pickle_in = open("Calls_67_pairs_X.pickle", "rb")
 #  pickle_in = open("X.pickle", "rb")
@@ -108,20 +135,21 @@ for train, test in k_fold.split(inputs, targets):
     model.fit(inputs[train], targets[train], batch_size=128, epochs=epoch, validation_split=0.2, callbacks=[tensorboard])
 
     # Test vs Training
-    test_eval = model.evaluate(inputs[test], targets[test], verbose=0)
+    #test_eval = model.evaluate(inputs[test], targets[test], verbose=0)
+    test_eval = model.evaluate(inputs_ori, targets_ori, verbose=0)
     acc_per_fold.append(test_eval[1])
     loss_per_fold.append(test_eval[0])
 
     print('Test accuracy:', test_eval[1])
     print('Test loss:', test_eval[0])
 
-    y_prob = model.predict_proba(inputs[test])
-    y_pred = model.predict_classes(inputs[test])
+    y_prob = model.predict_proba(inputs_ori)
+    y_pred = model.predict_classes(inputs_ori)
     # print("Test Predictions:")
     # print(y_prob)
     # print(y_pred)
 
-    rounded_targets = np.argmax(targets[test], axis=1)
+    rounded_targets = np.argmax(targets_ori, axis=1)
 
     #cnf_matrix = confusion_matrix(rounded_targets, y_pred, labels=[0, 1, 2, 3, 4])
     cnf_matrix = confusion_matrix(rounded_targets, y_pred, labels=[0, 1, 2])
@@ -139,8 +167,8 @@ for train, test in k_fold.split(inputs, targets):
     #   roc_curve(targets[test][:, i], y_prob[:, 0])
     y_pred = to_categorical(y_pred, num_classes=3)
     #  y_pred = to_categorical(y_pred, num_classes=5)
-    macro_roc_auc    = roc_auc_score(targets[test], y_pred, average="macro")
-    weighted_roc_auc = roc_auc_score(targets[test], y_pred, average="weighted")
+    macro_roc_auc    = roc_auc_score(targets_ori, y_pred, average="macro")
+    weighted_roc_auc = roc_auc_score(targets_ori, y_pred, average="weighted")
 
     macro_auc_per_fold.append(macro_roc_auc)
     weighted_auc_per_fold.append(weighted_roc_auc)

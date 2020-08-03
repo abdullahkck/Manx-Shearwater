@@ -4,61 +4,46 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-normalize = True
-title = "CM of Balanced 3 Pairs kNN Classification Sum"
+normalize = False
+title = "3 Pairs CNN Classification Trained with Original Samples"
 
 sum = [[0,  0,  0],
     [0, 0,  0],
     [0,  0,  0]]
 
-fold1 = [[54,  0,  4],
- [ 2, 32,  1],
- [ 9,  2, 25]]
 
-fold2 = [[47,  5,  6],
- [ 1, 33,  1],
- [ 0,  1, 35]]
+fold1 = [[289,   3,   1],
+ [ 12, 159,   2],
+ [ 23,   1,  32]]
 
-fold3 = [[51,  6,  2],
- [ 0, 34,  0],
- [ 4,  5, 27]]
+fold2 = [[283,   8,   2],
+ [  8, 162,   3],
+ [ 20,   9,  27]]
 
-fold4 = [[54,  3,  2],
- [ 7, 27,  0],
- [ 5,  2, 29]]
+fold3 = [[282,   6,   5],
+ [ 18, 151,   4],
+ [ 29,   5,  22]]
 
-fold5 = [[52,  3,  3],
- [ 2, 32,  1],
- [ 5,  1, 30]]
+fold4 = [[273,  12,   8],
+ [  3, 166,   4],
+ [ 14,   4,  38]]
 
-fold6 = [[49,  3,  6],
- [ 0, 32,  3],
- [ 2,  0, 34]]
+fold5 = [[284,   5,   4],
+ [ 11, 159,   3],
+ [ 14,   7,  35]]
 
-fold7 = [[49,  5,  4],
- [ 1, 34,  0],
- [ 5,  5, 26]]
 
-fold8 = [[50,  1,  7],
- [ 1, 28,  6],
- [ 5,  1, 30]]
 
-fold9 = [[56,  0,  3],
- [ 1, 32,  1],
- [ 3,  3, 30]]
-
-fold10 = [[47,  1, 10],
- [ 0, 31,  4],
- [ 1,  2, 33]]
-
-all_folds = [fold1, fold2, fold3, fold4, fold5, fold6, fold7, fold8, fold9, fold10]
+all_folds = [fold1, fold2, fold3, fold4, fold5]
 
 for fold in all_folds:
     sum = np.add(sum, fold)
 
-sum = [[505,  32,  46],
- [ 23, 303,  21],
- [  7,  20, 333]]
+# sum = [[505,  32,  46],
+#  [ 23, 303,  21],
+#  [  7,  20, 333]]
+
+
 
 
 
