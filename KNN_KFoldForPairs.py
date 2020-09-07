@@ -15,24 +15,28 @@ from sklearn.model_selection import StratifiedShuffleSplit
 
 
 def main():
+    num_classes = 5
     num_folds = 10
     fold_no = 1
-    NAME = "Pairs-(685_754)-(686_755)-(686_308)-" + str(num_folds) + "-folds-KNN"
-    cm_sum = [[0, 0, 0],
-           [0, 0, 0],
-           [0, 0, 0]]
+    NAME = "kNN-classification-5-burrows-" + str(num_folds) + "-folds"
+    cm_sum = [[0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0]]
 
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
     #  dataset_name = "Calls_67_X_encoded_30e_(4x40x30)"
-    dataset_name = "Calls_67_pairs_generated_X_encoded_30e_(4x40x30)"
+    #  dataset_name = "Calls_67_pairs_generated_X_encoded_30e_(4x40x30)"
+    dataset_name = "Calls_all_X_encoded_30e_(4x40x30)"
 
     pickle_in = open(dataset_name + ".pickle", "rb")
     X = pickle.load(pickle_in)
     X = X.reshape(len(X), 4800)
 
     #  pickle_in = open("Calls_67_y.pickle", "rb")
-    pickle_in = open("Calls_67_pairs_generated_y.pickle", "rb")
+    pickle_in = open("Calls_all_y.pickle", "rb")
     y = pickle.load(pickle_in)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -50,7 +54,7 @@ def main():
     targets = np.concatenate((y_train, y_test), axis=0)
 
     # convert the training labels to categorical vectors
-    targets = to_categorical(targets, num_classes=3)
+    targets = to_categorical(targets, num_classes=num_classes)
 
     k_fold = StratifiedShuffleSplit(n_splits=num_folds, test_size=0.2, random_state=0)
 
@@ -91,7 +95,7 @@ def main():
 
             # rounded_targets = np.argmax(targets[test], axis=1)
 
-            cnf_matrix = confusion_matrix(targets[test].argmax(axis=1), y_pred.argmax(axis=1), labels=[0, 1, 2])
+            cnf_matrix = confusion_matrix(targets[test].argmax(axis=1), y_pred.argmax(axis=1), labels=[0, 1, 2, 3, 4])
             # cnf_matrix = confusion_matrix(rounded_targets, y_prob, labels=[0, 1, 2])
 
             print("Current Fold:")

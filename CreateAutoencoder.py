@@ -9,13 +9,15 @@ from keras.models import Sequential
 from sklearn.model_selection import train_test_split
 from keras.callbacks import TensorBoard
 import matplotlib.pyplot as plt
+from datetime import datetime
+
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-pickle_in = open("Calls_all_X.pickle", "rb")
+pickle_in = open("Calls_7_burrows_X.pickle", "rb")
 X = pickle.load(pickle_in)
 
-pickle_in = open("Calls_all_y.pickle", "rb")
+pickle_in = open("Calls_7_burrows_y.pickle", "rb")
 y = pickle.load(pickle_in)
 
 X_train, X_test, _, _ = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -50,6 +52,10 @@ x = UpSampling2D((2, 2))(x)
 decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(x)
 
 autoencoder = Model(input_img, decoded)
+
+print(".....Training started.....")
+start_time = datetime.now()
+
 autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 
 autoencoder.fit(X_train, X_train,
@@ -67,10 +73,15 @@ X_encoded_test = encoder.predict(X_test)  # Just to plot
 X_encoded = encoder.predict(X)
 
 # Save encoded inputs for unsupervised learning
-pickle_out = open("Calls_all_X_encoded_30e_(4x40x30).pickle", "wb")
+pickle_out = open("Calls_7_burrows_X_encoded_30e_(4x40x30).pickle", "wb")
 pickle.dump(X_encoded, pickle_out)
 pickle_out.close()
 # -----------------------------------------------
+
+print('------------------------------------------------------------------------')
+time_dif = datetime.now() - start_time
+print(".....Training finished.....")
+print("Training time: ", time_dif)
 
 decoded_imgs = autoencoder.predict(X_test)
 

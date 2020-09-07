@@ -4,23 +4,33 @@ import matplotlib.pyplot as plt
 
 
 # plt_title = 'kNN 10 folds 3 Pairs Classification Original vs Balanced Dataset'
-plt_title = 'CNN 3 Pairs original dataset testing with balanced vs original training'
+plt_title = '3 Pairs classification CNN vs kNN best results'
 #labels = ('Original', 'Balanced')
-labels = ('Orinigal', 'Balanced')
+labels = ('CNN balanced', 'kNN original')
 first_auc_scores = [
-0.915,
-0.909,
-0.872,
-0.927,
-0.921
+0.885,
+0.923,
+0.903,
+0.877,
+0.908,
+0.922,
+0.883,
+0.877,
+0.934,
+0.902
 ]
 
 second_auc_scores = [
-0.906,
-0.930,
-0.932,
-0.938,
-0.912
+0.927,
+0.940,
+0.925,
+0.925,
+0.973,
+0.957,
+0.922,
+0.941,
+0.918,
+0.921
 ]
 
 result = sts.mannwhitneyu(second_auc_scores, first_auc_scores, alternative='two-sided')
@@ -52,10 +62,10 @@ def label_diff(i,j,text,X,Y):
                  'shrinkA':1,'shrinkB':1.5,'linewidth':1}
     ax.annotate(text, xy=(X[i],y + 1.7), zorder=10)
 
-    #  ax.annotate('std =' + str("%.3f" % np.std(first_auc_scores)), xy=(X[i], y + 0.92), zorder=10)
-    #  ax.annotate('mean =' + str("%.3f" % np.mean(first_auc_scores)), xy=(X[i], y + 1.01), zorder=10)
-    ax.annotate('std =' + str("%.3f" % np.std(first_auc_scores)), xy=(X[i], y + 0.99), zorder=10)
-    ax.annotate('mean =' + str("%.3f" % np.mean(first_auc_scores)), xy=(X[i], y + 1.08), zorder=10)
+    ax.annotate('std =' + str("%.3f" % np.std(first_auc_scores)), xy=(X[i], y + 0.92), zorder=10)
+    ax.annotate('mean =' + str("%.3f" % np.mean(first_auc_scores)), xy=(X[i], y + 1.01), zorder=10)
+    #ax.annotate('std =' + str("%.3f" % np.std(first_auc_scores)), xy=(X[i], y + 0.99), zorder=10)
+    #ax.annotate('mean =' + str("%.3f" % np.mean(first_auc_scores)), xy=(X[i], y + 1.08), zorder=10)
     ax.annotate('std =' + str("%.3f" % np.std(second_auc_scores)), xy=(X[j], y + 0.99), zorder=10)
     ax.annotate('mean =' + str("%.3f" % np.mean(second_auc_scores)), xy=(X[j], y + 1.08), zorder=10)
     ax.annotate('', xy=(X[i], y + 1.2), xytext=(X[j], y + 1.2), arrowprops=props)

@@ -37,7 +37,7 @@ def createSpectrogram(directory, filepath, file):
 
 
 def main():
-    directory = '/Users/abdullahkucuk/Desktop/MSc/MSc Project/records.nosync/calls_all/'
+    directory = '/Users/abdullahkucuk/Desktop/MSc/MSc Project/records.nosync/calls_12_14/'
     convert_calls_to_spectograms(directory)
 
 

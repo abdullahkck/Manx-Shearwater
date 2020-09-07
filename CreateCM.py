@@ -4,52 +4,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-normalize = False
-title = "3 Pairs CNN Classification Trained with Original Samples"
+normalize = True
+title = "5 Burrows kNN Classification 10-folds"
 
-sum = [[0,  0,  0],
-    [0, 0,  0],
-    [0,  0,  0]]
-
-
-fold1 = [[289,   3,   1],
- [ 12, 159,   2],
- [ 23,   1,  32]]
-
-fold2 = [[283,   8,   2],
- [  8, 162,   3],
- [ 20,   9,  27]]
-
-fold3 = [[282,   6,   5],
- [ 18, 151,   4],
- [ 29,   5,  22]]
-
-fold4 = [[273,  12,   8],
- [  3, 166,   4],
- [ 14,   4,  38]]
-
-fold5 = [[284,   5,   4],
- [ 11, 159,   3],
- [ 14,   7,  35]]
-
-
-
-all_folds = [fold1, fold2, fold3, fold4, fold5]
-
-for fold in all_folds:
-    sum = np.add(sum, fold)
-
-# sum = [[505,  32,  46],
-#  [ 23, 303,  21],
-#  [  7,  20, 333]]
-
-
-
-
+sum = [[ 44 ,  2,   2,   9,  13],
+ [  0 , 77,   2,   1,   0],
+ [  2 ,  3, 199,   5,  11],
+ [  7 ,  1,  21, 474,  27],
+ [ 10 ,  0,  10,  19, 351]]
 
 cm = pd.DataFrame(sum,
-                     index=[i for i in ["685_754", "686_755", "686_308"]],
-                     columns=[i for i in ["685_754", "686_755", "686_308"]],
+                     index=[i for i in ["B001", "B003", "B004", "B006", "B007"]],
+                     columns=[i for i in ["B001", "B003", "B004", "B006", "B007"]],
                   )
 
 fmt = ".0f"

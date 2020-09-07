@@ -22,23 +22,26 @@ num_folds = 5
 fold_no = 1
 epoch = 25
 #  NAME = "Pairs-(685_754)-(686_755)-(686_308)-" + str(num_folds) + "-folds-" + str(epoch) + "-epochs"
-NAME = "CNN-classification-all-dataset" + str(num_folds) + "-folds-" + str(epoch) + "-epochs"
-num_classes = 3
+NAME = "CNN-classification-7-burrows" + str(num_folds) + "-folds-" + str(epoch) + "-epochs"
+num_classes = 7
 acc_per_fold = []
 loss_per_fold = []
 macro_auc_per_fold = []
 weighted_auc_per_fold = []
+cm_sum = [[0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0]]
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-#  pickle_in = open("Calls_all_X.pickle", "rb")
-pickle_in = open("Calls_67_pairs_X.pickle", "rb")
-#  pickle_in = open("X.pickle", "rb")
+pickle_in = open("Calls_7_burrows_X.pickle", "rb")
 X = pickle.load(pickle_in)
 
-#  pickle_in = open("Calls_all_y.pickle", "rb")
-pickle_in = open("Calls_67_pairs_y.pickle", "rb")
-#  pickle_in = open("y.pickle", "rb")
+pickle_in = open("Calls_7_burrows_y.pickle", "rb")
 y = pickle.load(pickle_in)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -61,7 +64,7 @@ unique, counts = np.unique(targets, return_counts=True)
 print(dict(zip(unique, counts)))
 
 # convert the training labels to categorical vectors
-targets = to_categorical(targets, num_classes=3)
+targets = to_categorical(targets, num_classes=num_classes)
 
 k_fold = StratifiedShuffleSplit(n_splits=num_folds, test_size=0.2, random_state=0)
 
@@ -92,8 +95,7 @@ for train, test in k_fold.split(inputs, targets):
 
     model.add(Dense(256))
     model.add(Dense(32))
-    model.add(Dense(3))
-    #  model.add(Dense(5))
+    model.add(Dense(num_classes))
 
     model.add(Activation('sigmoid'))
 
@@ -123,12 +125,13 @@ for train, test in k_fold.split(inputs, targets):
 
     rounded_targets = np.argmax(targets[test], axis=1)
 
-    #cnf_matrix = confusion_matrix(rounded_targets, y_pred, labels=[0, 1, 2, 3, 4])
-    cnf_matrix = confusion_matrix(rounded_targets, y_pred, labels=[0, 1, 2])
-    # np.set_printoptions(precision=2)
+    cnf_matrix = confusion_matrix(rounded_targets, y_pred, labels=[0, 1, 2, 3, 4, 5, 6])
+
     print("Current Fold:")
     print(fold_no)
     print(cnf_matrix)
+
+    cm_sum = np.add(cm_sum, cnf_matrix)
 
     # plot_confusion_matrix(cm=cnf_matrix,
     #                       normalize=True,
@@ -137,8 +140,8 @@ for train, test in k_fold.split(inputs, targets):
 
     # for i in num_classes:
     #   roc_curve(targets[test][:, i], y_prob[:, 0])
-    y_pred = to_categorical(y_pred, num_classes=3)
-    #  y_pred = to_categorical(y_pred, num_classes=5)
+    y_pred = to_categorical(y_pred, num_classes=num_classes)
+
     macro_roc_auc    = roc_auc_score(targets[test], y_pred, average="macro")
     weighted_roc_auc = roc_auc_score(targets[test], y_pred, average="weighted")
 
@@ -170,6 +173,7 @@ print('Std:', '%0.3f' % np.std(acc_per_fold))
 print('Loss:', '%0.3f' % np.mean(loss_per_fold))
 print('Macro AUC:', '%0.3f' % np.mean(macro_auc_per_fold))
 print('Weighted AUC:', '%0.3f' % np.mean(weighted_auc_per_fold))
+print(cm_sum)
 print('------------------------------------------------------------------------')
 
 
